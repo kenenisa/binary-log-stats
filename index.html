@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stats</title>
+    <link rel="stylesheet" href="stylev01.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader"></div>
+    <div class="online" id="online">
+    </div>
+    <div id="con" class="con">
+      <div class="head">
+        <select id="shopInput">
+          <option value="1">shop 1</option>
+          <option value="2">shop 2</option>
+          <option value="3">shop 3</option>
+        </select>
+        <input type="date" name="dateInput" id="dateInput" />
+      </div>
+      <div class="content" id="content">
+        <h2>Logs</h2>
+        <div class="logs" id="con-logs">
+          <div class="table">
+            <div class="header">
+              <div class="section">
+                Morning
+                <div>
+                  <span>In</span>
+                  <span>Out</span>
+                </div>
+              </div>
+              <div class="section">
+                Afternoon
+                <div>
+                  <span>In</span>
+                  <span>Out</span>
+                </div>
+              </div>
+              <div class="section">
+                Night
+                <div>
+                  <span>In</span>
+                  <span>Out</span>
+                </div>
+              </div>
+            </div>
+            <div class="list" id="log-list">
+              
+            </div>
+          </div>
+          </div>
+          <h2>Graph</h2>
+          <div class="timeline" id="con-graph">
+            <div class="ruler" id="ruler"></div>
+            <div class="now" id="now">Now</div>
+            <div class="item-con" id="data"></div>
+          </div>
+          <h2>Summary</h2>
+          <div class="summary" id="con-summary">
+            <div class="h">Total time: <span id="total-hours">n/a</span></div>
+            <div class="table">
+            <div class="item">
+              <span></span>
+              <span>Working time</span>
+              <span>Total share</span>
+            </div>
+            <div id="summary-list">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./util/colorHash.js"></script>
+    <script src="./util/parseTime.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
