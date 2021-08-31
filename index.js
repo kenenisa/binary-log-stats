@@ -58,6 +58,7 @@ function calcP(num, reset = true) {
 }
 
 function renderLogs() {
+
     id("log-list").innerHTML = "";
     data.forEach((d) => {
         const newLogs = [];
@@ -84,7 +85,7 @@ function renderLogs() {
             const valueOut = newLogs
                 .filter(
                     (l) =>
-                        l.time > morning && l.time < afternoon  && l.type === "out"
+                        l.time > morning && l.time < afternoon && l.type === "out"
                 )
                 .sort((x, y) => y.time - x.time)[0];
             if (valueIn || valueOut) {
@@ -188,6 +189,7 @@ function renderLogs() {
 
 function renderSummary() {
     let total = 0;
+
     id("summary-list").innerHTML = "";
     data.forEach((d) => {
         d.logs
@@ -231,21 +233,30 @@ function renderSummary() {
     });
     id("total-hours").innerHTML = parseTime(total);
 }
+
 function render() {
     id("data").innerHTML = "";
-    id('online').innerHTML = ''
+    id('shop-1-online').innerHTML = ''
+    id('shop-2-online').innerHTML = ''
+    id('shop-3-online').innerHTML = ''
     renderLogs();
     renderSummary();
     if (thisMorning()) {
         id('now').style.left = `${calcP(new Date().getTime() - morning)}% `;
     }
     data.forEach((d) => {
+        const user = d.user;
         if (d.user.online) {
-            id('online').innerHTML += `<span span class="user" > <span></span>${d.user.name} <i>(${d.user.shop ? d.user.shop.loc : ''}) - ${d.user.shop ? parseTime(new Date().getTime() - d.user.shop.time, true) : ''}</i></span > `
+            id('online').style.display = 'block';
+            id(`shop${user.shop ? user.shop.loc : '1'}-stat`).innerHTML = 'online';
+            id(`shop${user.shop ? user.shop.loc : '1'}-stat`).className = 'stat';
+            id(`shop-${user.shop ? user.shop.loc : '1'}-online`).innerHTML += ` <div class="user">
+            <span class="name">${user.name}</span>
+            <span class="time">${parseTime(new Date().getTime() - user.shop.time, true)}</span>
+          </div>`
         }
         const logs = d.logs.filter((l) => {
             return (
-                // (l.at > morning || l.at < night) && l.out_at && l.shop === shop
                 (l.at > morning || l.at < night) && l.shop === shop
             );
         });
@@ -278,15 +289,10 @@ function render() {
 }
 id("dateInput").addEventListener("change", (e) => {
     st = new Date(e.target.value);
-    morning = new Date(
-        `${st.getMonth() + 1} -${st.getDate()} -${st.getFullYear()} 6: 00 AM`
-    ).getTime();
-    afternoon = new Date(
-        `${st.getMonth() + 1} -${st.getDate()} -${st.getFullYear()} 12: 00 PM`
-    ).getTime();
-    evening = new Date(
-        `${st.getMonth() + 1} -${st.getDate()} -${st.getFullYear()} 6: 00 PM`
-    ).getTime();
+    const selected = e.target.value
+    morning = new Date(`${selected} 6: 00 AM`).getTime();
+    afternoon = new Date(`${selected} 12: 00 PM`).getTime();
+    evening = new Date(`${selected} 6: 00 PM`).getTime();
     night = morning + eighteenHours;
     month = st.getMonth();
     render();
