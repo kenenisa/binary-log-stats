@@ -353,8 +353,8 @@ for (let i = 0; i < 18; i++) {
 
 
 //
-// fetch("https://infinite-wave-33038.herokuapp.com/data")
-fetch("http://localhost:5000/data")
+fetch("https://infinite-wave-33038.herokuapp.com/data")
+// fetch("http://localhost:5000/data")
     .then((e) => e.json())
     .then((val) => {
         val.sort((x, y) => x.user.id - y.user.id)
