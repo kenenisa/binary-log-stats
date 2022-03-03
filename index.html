@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>stats</title>
-    <link rel="stylesheet" href="stylev02.css" />
+    <link rel="stylesheet" href="stylev03.css" />
   </head>
   <body>
     <div class="loader" id="loader"></div>
@@ -14,22 +14,17 @@
       <div class="shop" id="shop1">
         <div class="num">1</div>
         <div class="stat off" id="shop1-stat">Offline</div>
-        <div class="users" id="shop-1-online">
-         
-        </div>
+        <div class="users" id="shop-1-online"></div>
       </div>
       <div class="shop s2" id="shop2">
         <div class="num">2</div>
         <div class="stat off" id="shop2-stat">Offline</div>
-        <div class="users" id="shop-2-online">
-        </div>
+        <div class="users" id="shop-2-online"></div>
       </div>
       <div class="shop s3" id="shop3">
         <div class="num">3</div>
         <div class="stat off" id="shop3-stat">Offline</div>
-        <div class="users" id="shop-3-online">
-         
-        </div>
+        <div class="users" id="shop-3-online"></div>
       </div>
     </div>
     <div id="con" class="con">
@@ -74,7 +69,14 @@
         <h2>Graph</h2>
         <div class="timeline" id="con-graph">
           <div class="ruler" id="ruler"></div>
-          <div class="now" id="now">Now</div>
+          <div class="hover" id="hover">
+            <div class="dx" id="dx"><span></span></div>
+          </div>
+          <!-- </div> -->
+          <div class="now" id="now">
+            Now<span id="now-time" class="now-time"></span>
+          </div>
+
           <div class="item-con" id="data"></div>
         </div>
         <h2>Summary</h2>

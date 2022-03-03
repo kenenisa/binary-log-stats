@@ -59,3 +59,19 @@ function thisMorning(){
     ).getTime();
     return morning == then;
 }
+
+function formatAmPm (date,s=false) {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();    
+    let seconds = date.getSeconds();    
+    const amPm = hours >= 12 ? 'pm' : 'am';
+  
+    hours %= 12;
+    hours = hours || 12;    
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    const strTime = `${hours}:${minutes}${s?':' + seconds:''} ${amPm}`;
+  
+    return strTime;
+  };

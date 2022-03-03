@@ -233,9 +233,50 @@ function renderSummary() {
     });
     id("total-hours").innerHTML = parseTime(total);
 }
+let mouse = { x: 0, y: 0 }
+window.onmousemove = (e, f) => {
+    mouse = { y: e.y }
+}
+function mouseEnter(e, i) {
+    e.children[0].style.top = mouse.y + '%'
+    e.children[0].style.display = 'block'
+}
+function mouseLeave(e, i) {
+    e.children[0].style.display = 'none'
+}
+let windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+const boxWidth = id('hover').clientWidth;
+const boxLeft = windowWidth - boxWidth
 
+window.addEventListener('resize',()=>{
+    windowWidth = window.innerWidth
+})
+let hovering = false
+const MoriningTimeMs = new Date(
+    `${st.getMonth() + 1}-${st.getDate()}-${st.getFullYear()} 6:00 AM`
+).getTime()
+id('hover').addEventListener('mousemove', (e) => {
+    if (hovering) {
+        const formattedTime = formatAmPm(new Date(MoriningTimeMs + ((((e.clientX - 97) * 100) / (windowWidth - 113)) / 0.0925925926) * 60 * 1000))
+        id('dx').style.left = (e.clientX - 97) + 'px'
+        if(id('dx').children[0]){
+            id('dx').children[0].innerHTML = formattedTime
+            id('dx').children[0].style.top = (mouse.y - 25) + 'px'
+        }
+    }
+})
+id('hover').addEventListener('mouseenter', (e) => {
+    hovering = true;
+    id("dx").innerHTML = `<span></span>`
+})
+id('hover').addEventListener('mouseleave', (e) => {
+    id("dx").innerHTML = ``
+    hovering = false;
+
+})
 function render() {
-    id("data").innerHTML = "";
+    id("data").innerHTML = '';
     id('shop-1-online').innerHTML = ''
     id('shop-2-online').innerHTML = ''
     id('shop-3-online').innerHTML = ''
@@ -243,6 +284,9 @@ function render() {
     renderSummary();
     if (thisMorning()) {
         id('now').style.left = `${calcP(new Date().getTime() - morning)}% `;
+        setInterval(() => {
+            id('now-time').innerHTML = formatAmPm(new Date(), true);
+        }, 1000)
     }
     data.forEach((d) => {
         const user = d.user;
@@ -306,15 +350,21 @@ for (let i = 0; i < 18; i++) {
     id("ruler").innerHTML += `<span class="tick" style = "left:${5.555 * i
         }% ">${timeData[i] ? `<i>${timeData[i]}</i>` : ""}</span>`;
 }
+
+
 //
-fetch("https://infinite-wave-33038.herokuapp.com/data")
-// fetch("http://localhost:5000/data")
+// fetch("https://infinite-wave-33038.herokuapp.com/data")
+fetch("http://localhost:5000/data")
     .then((e) => e.json())
     .then((val) => {
         val.sort((x, y) => x.user.id - y.user.id)
 
         data = val;
         render();
+
+        setInterval(() => {
+            render();
+        }, 1000 * 60)
         id("loader").style = "display:none"
         id('content').style = "display:block";
 

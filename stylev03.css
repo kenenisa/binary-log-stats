@@ -151,6 +151,36 @@ body {
   border-radius: 2px;
   opacity: 0.8;
 }
+.content .timeline .hover{
+  position:absolute;
+  top:0rem;
+  left:0rem;
+  width:100%;
+  height:100%;
+  z-index:2;
+  overflow: hidden;
+  display: block;
+  /* background:rgba(255, 0, 0, 0.514) */
+}
+.content .timeline .hover .dx{
+  position: relative;
+  top:0;
+  width:0.0925925%;
+  /* width:0.5rem; */
+  height:100%;
+  display:inline-block;
+  cursor: normal;
+  transform: all 1s;
+  background:rgba(0,0,0,0.4)
+}
+.content .timeline .hover .dx span{
+  position: fixed;
+  z-index:3;
+  background:rgba(0,0,0,0.2);
+  border-radius:5px;
+  padding:0.2rem 0.3rem;
+  /* display: none; */
+}
 .logs .table {
   position: relative;
   top: 0;
@@ -367,10 +397,18 @@ body {
   /* box-shadow: -4px -5px 10px 3px rgba(233, 55, 11, 0.3); */
   z-index: 0;
 }
+#now-time{
+  position:absolute;
+  top:0.15rem;
+  left:2.05rem;
+  color:rgb(233, 55, 11);
+  width:4.5rem;
+  /* background: red; */
+}
 .online {
   position: relative;
   top: 0.5;
-  width: 26rem;
+  width: 36rem;
   margin: auto;
   min-height: 4rem;
   display: none;
@@ -381,11 +419,12 @@ body {
   top: 0;
   left: 0;
   display: inline-block;
-  width: 8.5rem;
+  width: 11.5rem;
   height: 100%;
   background: rgb(228, 228, 228);
   border-radius: 5px;
   overflow: hidden;
+  overflow-y: scroll;
 }
 .online .shop.s2 {
   left: 33.33%;
