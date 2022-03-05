@@ -39,7 +39,7 @@ const timeData = {
     16: "10",
     17: "11",
 };
-let st = new Date();
+let st = new Date()
 let morning = new Date(
     `${st.getMonth() + 1}-${st.getDate()}-${st.getFullYear()} 6:00 AM`
 ).getTime();
@@ -62,128 +62,49 @@ function renderLogs() {
     id("log-list").innerHTML = "";
     data.forEach((d) => {
         const newLogs = [];
-        const logs = d.logs.filter((l) => {
+        let logs = d.logs.filter((l) => {
             return (
-                l.at > morning && l.at < night && l.out_at && l.shop === shop
+                l.at > morning && l.at < night && l.out_at
             );
         });
-        logs.forEach((l) => {
-            if (l.at > morning) {
-                newLogs.push({ time: l.at, type: "in" });
+        logs = logs.filter(l => {
+            return l.at > morning && l.out_at < night
+        })
+        for (let i = 0; i < logs.length; i++) {
+            let diff = 0
+            if (i == 0) {
+                newLogs.push(logs[0])
             }
-            if (l.out_at < night) {
-                newLogs.push({ time: l.out_at || null, type: "out" });
+            if (logs[i + 1]) {
+                diff = logs[i + 1].at - logs[i].out_at
+                // newLogs.push({ break: true, diff: diff < 1000 * 60 ? '' : parseTime(diff) })
+                newLogs.push({ break: true, diff: parseTime(diff < 0 ? 0 : diff, true) })
+                newLogs.push(logs[i + 1])
             }
-        });
-        function checkMorning() {
+        }
+        let theLogs = '';
+        newLogs.forEach(l => {
+            theLogs += `
+            ${l.break ?
+                    `<div class="pocket-break">${l.diff}</div>` :
+                    `<div class="pocket">
+                    <span>Shop <b>${l.shop}</b> - <i>${parseTime(l.out_at - l.at, true)}</i></span>
+                    
+                    <div class="time">
+                    ${toTime(l.at)} - ${toTime(l.out_at)}
+                    </div>
+                </div>`}
+            `
+        })
 
-            const valueIn = newLogs
-                .filter(
-                    (l) => l.time > morning && l.time < afternoon && l.type === "in"
-                )
-                .sort((x, y) => x.time - y.time)[0];
-            const valueOut = newLogs
-                .filter(
-                    (l) =>
-                        l.time > morning && l.time < afternoon && l.type === "out"
-                )
-                .sort((x, y) => y.time - x.time)[0];
-            if (valueIn || valueOut) {
-                return `<span class="time morning">
-          
-          
-                ${valueIn
-                        ? `<span class="${valueIn.type}"> ${toTime(
-                            valueIn.time
-                        )} </span>`
-                        : `<span class="in">6:00 AM</span>`
-                    }
-                ${valueOut
-                        ? `<span class="${valueOut.type}"> ${toTime(
-                            valueOut.time
-                        )} </span>`
-                        : `<span class="out">12:00 PM</span>`
-                    }
-                </span>
-                `;
-            } else {
-                return "";
-            }
-        }
-        function checkAfternoon() {
-            const valueIn = newLogs
-                .filter(
-                    (l) => l.time > afternoon && l.time < evening && l.type === "in"
-                )
-                .sort((x, y) => x.time - y.time)[0];
-            const valueOut = newLogs
-                .filter(
-                    (l) =>
-                        l.time > afternoon && l.time < evening && l.type === "out"
-                )
-                .sort((x, y) => y.time - x.time)[0];
-            if (valueIn || valueOut) {
-                return `<span class="time afternoon">
-          
-                ${valueIn
-                        ? `<span class="${valueIn.type}"> ${toTime(
-                            valueIn.time
-                        )} </span>`
-                        : `<span class="in">12:00 PM</span>`
-                    }
-                ${valueOut
-                        ? `<span class="${valueOut.type}"> ${toTime(
-                            valueOut.time
-                        )} </span>`
-                        : `<span class="out">6:00 PM</span>`
-                    }
-                </span>
-                `;
-            } else {
-                return "";
-            }
-        }
-        function checkNight() {
-            const valueIn = newLogs
-                .filter(
-                    (l) => l.time > evening && l.time < night && l.type === "in"
-                )
-                .sort((x, y) => x.time - y.time)[0];
-            const valueOut = newLogs
-                .filter(
-                    (l) => l.time > evening && l.time < night && l.type === "out"
-                )
-                .sort((x, y) => y.time - x.time)[0];
-            if (valueIn || valueOut) {
-                return `<span class="time night">
-          
-          
-                ${valueIn
-                        ? `<span class="${valueIn.type}"> ${toTime(
-                            valueIn.time
-                        )} </span>`
-                        : `<span class=" in ">6:00 PM</span>`
-                    }
-                ${valueOut
-                        ? `<span class="${valueOut.type}"> ${toTime(
-                            valueOut.time
-                        )} </span>`
-                        : `<span class="out">12:00 AM</span>`
-                    }
-                
-                </span >
-                `;
-            } else {
-                return "";
-            }
-        }
         id("log-list").innerHTML += `
-                <div div class="item" >
-                    <span class="name">${d.user.name}</span>
-            ${checkMorning()}
-            ${checkAfternoon()}
-            ${checkNight()}
-        </div > `;
+            <div div class="item ${logs.length > 0 && 'jira'}" >
+            <span class="name">${d.user.name}</span>
+            <div class="pocket-con">
+            ${theLogs}
+            </div>
+            </div > `;
+
     });
 }
 
@@ -249,7 +170,7 @@ const windowHeight = window.innerHeight;
 const boxWidth = id('hover').clientWidth;
 const boxLeft = windowWidth - boxWidth
 
-window.addEventListener('resize',()=>{
+window.addEventListener('resize', () => {
     windowWidth = window.innerWidth
 })
 let hovering = false
@@ -260,7 +181,7 @@ id('hover').addEventListener('mousemove', (e) => {
     if (hovering) {
         const formattedTime = formatAmPm(new Date(MoriningTimeMs + ((((e.clientX - 97) * 100) / (windowWidth - 113)) / 0.0925925926) * 60 * 1000))
         id('dx').style.left = (e.clientX - 97) + 'px'
-        if(id('dx').children[0]){
+        if (id('dx').children[0]) {
             id('dx').children[0].innerHTML = formattedTime
             id('dx').children[0].style.top = (mouse.y - 25) + 'px'
         }
