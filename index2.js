@@ -64,7 +64,7 @@ function renderLogs() {
         const newLogs = [];
         let logs = d.logs.filter((l) => {
             return (
-                l.at > morning && l.at < night && l.out_at
+                l.at > morning && l.at < night
             );
         });
         logs = logs.filter(l => {
@@ -84,11 +84,12 @@ function renderLogs() {
         }
         let theLogs = '';
         newLogs.forEach(l => {
+            const out = l.out_at ? l.out_at : new Date().getTime()
             theLogs += `
             ${l.break ?
                     `<div class="pocket-break">${l.diff}</div>` :
                     `<div class="pocket">
-                    <span>Shop <b>${l.shop}</b> - <i>${parseTime(l.out_at - l.at, true)}</i></span>
+                    <span>Shop <b>${l.shop}</b> - <i>${parseTime(out - l.at, true)}</i></span>
                     
                     <div class="time">
                     ${toTime(l.at)} - ${toTime(l.out_at)}

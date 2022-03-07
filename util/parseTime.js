@@ -46,7 +46,7 @@ function getTime(str) {
     return tConvert(str[0].slice(0, -3));
 }
 function toTime(num) {
-    if(num === null) return 'Present';
+    if(num === null) return 'Now';
     return getTime(new Date(Number(num)));
 }
 function getMonth(time) {
