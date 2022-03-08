@@ -88,7 +88,7 @@ function renderLogs() {
             if (logs[i + 1]) {
                 diff = logs[i + 1].at - logs[i].out_at
                 // newLogs.push({ break: true, diff: diff < 1000 * 60 ? '' : parseTime(diff) })
-                newLogs.push({ break: true, diff: parseTime(diff < 0 ? 0 : (diff < 1000 ? 1001 : diff), true) })
+                newLogs.push({ break: true, diff: parseTime(diff < 0 ? 0 : (diff <= 1000 ? 1001 : diff), true) })
                 newLogs.push(logs[i + 1])
             }
         }
