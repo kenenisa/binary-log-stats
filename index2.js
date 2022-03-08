@@ -56,7 +56,18 @@ function calcP(num, reset = true) {
     let xy = (100 * num) / eighteenHours;
     return xy;
 }
+let hoverSwitch = false;
+// id('hover').addEventListener('click', () => {
+// })
+id('data').addEventListener('click', () => {
+    hoverSwitch = !hoverSwitch
+    if (hoverSwitch) {
+        id('hover').style.display = 'none'
+    } else {
+        id('hover').style.display = 'block'
+    }
 
+})
 function renderLogs() {
 
     id("log-list").innerHTML = "";
@@ -276,7 +287,7 @@ for (let i = 0; i < 18; i++) {
 
 //
 fetch("https://infinite-wave-33038.herokuapp.com/data")
-// fetch("http://localhost:5000/data")
+    // fetch("http://localhost:5000/data")
     .then((e) => e.json())
     .then((val) => {
         val.sort((x, y) => x.user.id - y.user.id)
