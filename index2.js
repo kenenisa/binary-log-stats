@@ -57,17 +57,16 @@ function calcP(num, reset = true) {
     return xy;
 }
 let hoverSwitch = false;
-// id('hover').addEventListener('click', () => {
-// })
-id('data').addEventListener('click', () => {
+function hoverSwitcher() {
     hoverSwitch = !hoverSwitch
     if (hoverSwitch) {
         id('hover').style.display = 'none'
     } else {
         id('hover').style.display = 'block'
     }
-
-})
+}
+id('hover').addEventListener('click', hoverSwitcher)
+id('data').addEventListener('click', hoverSwitcher)
 function renderLogs() {
 
     id("log-list").innerHTML = "";
@@ -89,7 +88,7 @@ function renderLogs() {
             if (logs[i + 1]) {
                 diff = logs[i + 1].at - logs[i].out_at
                 // newLogs.push({ break: true, diff: diff < 1000 * 60 ? '' : parseTime(diff) })
-                newLogs.push({ break: true, diff: parseTime(diff < 0 ? 0 : diff, true) })
+                newLogs.push({ break: true, diff: parseTime(diff < 0 ? 0 : (diff < 1000 ? 1001 : diff), true) })
                 newLogs.push(logs[i + 1])
             }
         }
@@ -287,7 +286,7 @@ for (let i = 0; i < 18; i++) {
 
 //
 fetch("https://infinite-wave-33038.herokuapp.com/data")
-    // fetch("http://localhost:5000/data")
+// fetch("http://localhost:5000/data")
     .then((e) => e.json())
     .then((val) => {
         val.sort((x, y) => x.user.id - y.user.id)
