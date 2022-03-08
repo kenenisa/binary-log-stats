@@ -212,7 +212,7 @@ function render() {
     }
     data.forEach((d) => {
         const user = d.user;
-        if (d.user.online) {
+        if (d.user.online && user.shop.loc) {
             id('online').style.display = 'block';
             id(`shop${user.shop ? user.shop.loc : '1'}-stat`).innerHTML = 'online';
             id(`shop${user.shop ? user.shop.loc : '1'}-stat`).className = 'stat';
