@@ -1,7 +1,7 @@
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 1px;
-  height:5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -13,7 +13,7 @@
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: #7e7e7e91; 
+  background: #7e7e7e91;
 }
 body {
   margin: 0;
@@ -168,34 +168,34 @@ body {
   border-radius: 2px;
   opacity: 0.8;
 }
-.content .timeline .hover{
-  position:absolute;
-  top:0rem;
-  left:0rem;
-  width:100%;
-  height:100%;
-  z-index:2;
+.content .timeline .hover {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   overflow: hidden;
   display: block;
   /* background:rgba(255, 0, 0, 0.514) */
 }
-.content .timeline .hover .dx{
+.content .timeline .hover .dx {
   position: relative;
-  top:0;
-  width:0.0925925%;
+  top: 0;
+  width: 0.0925925%;
   /* width:0.5rem; */
-  height:100%;
-  display:inline-block;
+  height: 100%;
+  display: inline-block;
   cursor: normal;
   transform: all 1s;
-  background:rgba(0,0,0,0.4)
+  background: rgba(0, 0, 0, 0.4);
 }
-.content .timeline .hover .dx span{
+.content .timeline .hover .dx span {
   position: fixed;
-  z-index:3;
-  background:rgba(0,0,0,0.2);
-  border-radius:5px;
-  padding:0.2rem 0.3rem;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 0.2rem 0.3rem;
   /* display: none; */
 }
 .logs .table {
@@ -205,12 +205,17 @@ body {
   width: 80%;
   background-color: rgba(238, 238, 238, 0.479);
 }
+@media screen and (max-width: 768px) {
+  .logs .table {
+    left: 2.5%;
+    width: 95%;
+  }
+}
 .logs .table .list {
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
-
 }
 .logs .table .list .item {
   position: relative;
@@ -220,71 +225,69 @@ body {
   height: 2.4rem;
   border-bottom: 1px solid #ddd;
   background: rgba(214, 214, 214, 0.801);
-  margin:2rem 0;
+  margin: 4rem 0;
 }
-.logs .table .list .item.jira{
+/* .logs .table .list .item.jira{
   background:rgba(255, 0, 0, 0.158);
-}
-.logs .table .list .item .pocket-con{
+} */
+.logs .table .list .item .pocket-con {
   position: absolute;
-  top:-1.5rem;
-  left:0;
-  width:100%;
-  height:100%;
+  top: -1.5rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow-x: scroll;
   white-space: nowrap;
   overflow-y: visible;
-  padding-top:1.5rem;
+  padding-top: 1.5rem;
 }
-.logs .table .list .item .pocket{
-  position:relative;
-  left:0;
-  top:0;
-  width:10rem;
-  height:100%;
-  background:rgb(157, 211, 157);
-  display:inline-block;
-  margin-right:0.75rem;
-  text-align:center;
-  font-size:0.9rem;
+.logs .table .list .item .pocket {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 10rem;
+  height: 100%;
+  background: rgb(157, 211, 157);
+  display: inline-block;
+  text-align: center;
+  font-size: 0.9rem;
   line-height: 2rem;
   overflow-y: visible;
 }
-.logs .table .list .item .pocket span{
-  position:absolute;
-  top:-1.05rem;
-  left:0;
-  width:7rem;
-  background:rgba(0, 0, 0, 0.082);
+.logs .table .list .item .pocket span {
+  position: absolute;
+  top: -1.05rem;
+  left: 0;
+  width: 7rem;
+  background: rgba(0, 0, 0, 0.082);
   line-height: 1rem;
 }
-.logs .table .list .item .pocket span b{
-  font-size:1rem;
+.logs .table .list .item .pocket span b {
+  font-size: 1rem;
 }
-.logs .table .list .item .pocket-break{
-  position:relative;
-  left:0;
-  top:-0rem;
-  margin-top:-2rem;
-  height:100%;
-  background:rgb(255, 217, 217);
-  display:inline-block;
-  text-align:center;
-  font-size:0.9rem;
+.logs .table .list .item .pocket-break {
+  position: relative;
+  left: 0;
+  top: -0rem;
+  margin-top: -2rem;
+  height: 100%;
+  background: rgb(255, 217, 217);
+  background: rgba(255, 0, 0, 0.158);
+  display: inline-block;
+  text-align: center;
+  font-size: 0.9rem;
   line-height: 2rem;
-  margin-right:1rem;
+  padding: 0 1rem;
 }
 .logs .table .list .item .name {
   position: absolute;
-  top: 0.25rem;
-  left: -6rem;
-  width: 6rem;
-  text-align: right;
-  padding-right: 0.25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
+  top: -3rem;
+  width: 100%;
+  border-top: 1px solid rgba(128, 128, 128, 0.384);
+  padding-top: 0.25rem;
+  /* left: -6rem; */
+  /* width: 6rem; */
+  /* text-align: right; */
 }
 .logs .table .list .item span.time {
   position: absolute;
@@ -441,12 +444,12 @@ body {
   /* box-shadow: -4px -5px 10px 3px rgba(233, 55, 11, 0.3); */
   z-index: 0;
 }
-#now-time{
-  position:absolute;
-  top:0.15rem;
-  left:2.05rem;
-  color:rgb(233, 55, 11);
-  width:4.5rem;
+#now-time {
+  position: absolute;
+  top: 0.15rem;
+  left: 2.05rem;
+  color: rgb(233, 55, 11);
+  width: 4.5rem;
   /* background: red; */
 }
 .online {
@@ -514,15 +517,15 @@ body {
 .content h2 {
   margin-left: 4rem;
 }
-@media screen and (max-width: 550px) {
+/* @media screen and (max-width: 550px) {
   .logs .table {
     left: 0%;
     width: calc(100% - 6rem);
-    transform:translateX(6rem)
+    transform: translateX(6rem);
   }
-}
+} */
 @media screen and (max-width: 500px) {
-  body{
-    width:500px
+  body {
+    width: 500px;
   }
 }

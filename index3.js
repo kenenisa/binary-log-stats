@@ -43,7 +43,7 @@ let st = new Date()
 let morning = new Date(
     `${st.getMonth() + 1}-${st.getDate()}-${st.getFullYear()} 6:00 AM`
 ).getTime();
-
+const reallyThisMorning = morning
 let afternoon = new Date(
     `${st.getMonth() + 1}-${st.getDate()}-${st.getFullYear()} 12:00 PM`
 ).getTime();
@@ -70,7 +70,15 @@ id('data').addEventListener('click', hoverSwitcher)
 function renderLogs() {
 
     id("log-list").innerHTML = "";
-    data.forEach((d) => {
+    data.sort(function(x,y){
+         let a = x.logs.filter(l => {
+            return l.at > morning && l.out_at < night
+        })
+        let b = y.logs.filter(l => {
+            return l.at > morning && l.out_at < night
+        })
+        return b.length - a.length
+    }).forEach((d) => {
         const newLogs = [];
         let logs = d.logs.filter((l) => {
             return (
@@ -79,6 +87,12 @@ function renderLogs() {
         });
         logs = logs.filter(l => {
             return l.at > morning && l.out_at < night
+        })
+        logs = logs.filter(l=>{
+            if(l.out_at){
+                return Number(l.out_at) - Number(l.at) > 1000
+            }
+            return true
         })
         for (let i = 0; i < logs.length; i++) {
             let diff = 0
@@ -222,7 +236,7 @@ function render() {
     }
     data.forEach((d) => {
         const user = d.user;
-        if (d.user.online && user.shop.loc) {
+        if (d.user.online && user.shop.loc && user.shop.time > reallyThisMorning) {
             id('online').style.display = 'block';
             id(`shop${user.shop ? user.shop.loc : '1'}-stat`).innerHTML = 'online';
             id(`shop${user.shop ? user.shop.loc : '1'}-stat`).className = 'stat';
