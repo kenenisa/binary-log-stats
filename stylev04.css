@@ -283,8 +283,10 @@ body {
   position: absolute;
   top: -3rem;
   width: 100%;
-  border-top: 1px solid rgba(128, 128, 128, 0.384);
+  border-top: 1px solid rgba(155, 155, 155, 0.438);
   padding-top: 0.25rem;
+  font-size:1.2rem;
+  font-weight: bold;
   /* left: -6rem; */
   /* width: 6rem; */
   /* text-align: right; */
